@@ -1,0 +1,86 @@
+<!--index.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            border: solid 2px #000;
+            padding: 20px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            border: solid 2px ;
+            padding: 10px;
+            max-width: 13   0px;
+            margin: auto;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <form action="">
+            <h2>Library Management System</h2>
+            <table>
+                <tr>
+                    <td><label for="is_id">Issue Id</label></td>
+                    <td><input type="text" id="is_id"></td>
+                </tr>
+                <tr>
+                    <td><label for="s_id">Student Id</label></td>
+                    <td><input type="text" id="s_id"></td>
+                </tr>
+                <tr>
+                    <td><label for="b_id">Book Id</label></td>
+                    <td><input type="text" id="b_id"></td>
+                </tr>
+                <tr>
+                    <td><label for="d_is">Date Isuued</label></td>
+                    <td><input type="date" id="d_is"></td>
+                </tr>
+                <tr>
+                    <td><label for="d_du">Date Due</label></td>
+                    <td><input type="text" id="d_du"></td>
+                </tr>
+                <tr>
+                    <td><label for="d_re">Date Return</label></td>
+                    <td><input type="text" id="d_re"></td>
+                </tr>
+                <tr>
+                    <td><label for="fine">fine</label></td>
+                    <td><input type="text" id="fine"></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <div class="buttons">
+                <input type="button" value="Submit">
+                <input type="button" value="Update">
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('d_du').onchange = function() {
+            var datereturn = new Date(document.getElementById('d_re').value);
+            var datedue = new Date(document.getElementById('d_du').value);
+            if (datereturn) {
+            var datedifference = (datereturn - datedue) / (1000 * 60 * 60 * 24);
+            if (datedifference > 0) {
+                var fine = datedifference * 10;
+                document.getElementById('fine').value = fine;
+            } else {
+                document.getElementById('fine').value = 0;
+            }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table class="auto-style1">
+          <tr>
+            <td class="auto-style2">
+              <asp:Label ID="Label1" runat="server" CssClass="auto-style4" Text="Registration number"></asp:Label>
+            </td>
+            <td class="auto-style3">
+              <asp:TextBox ID="txt_regNo" runat="server" Width="211px"></asp:TextBox>
+            </td>
+            <td>
+              <em>
+                <asp:RequiredFieldValidator ID="RFV1" runat="server" ControlToValidate="txt_regNo" CssClass="auto-style5" ErrorMessage="Registration Number is required"></asp:RequiredFieldValidator>
+              </em>
+            </td>
+          </tr>
+          <tr>
+            <td class="auto-style2">
+              <asp:Label ID="Label2" runat="server" CssClass="auto-style4" Text="OUSL Center"></asp:Label>
+            </td>
+            <td class="auto-style3">
+              <asp:ListBox ID="lb_cent" runat="server" Height="107px" CssClass="auto-style3" Width="93px">
+                <asp:ListItem>CRC</asp:ListItem>
+                <asp:ListItem>KRC</asp:ListItem>
+                <asp:ListItem>BRC</asp:ListItem>
+                <asp:ListItem>MRC</asp:ListItem>
+                <asp:ListItem>ARC</asp:ListItem>
+              </asp:ListBox>
+            </td>
+            <td>
+              <em>
+                <asp:RequiredFieldValidator ID="RFV2" runat="server" ControlToValidate="lb_cent" CssClass="auto-style5" ErrorMessage="Center is required"></asp:RequiredFieldValidator>
+              </em>
+            </td>
+          </tr>
+        </table>
+      </form>
+      
+</body>
+</html>
