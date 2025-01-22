@@ -1,0 +1,29 @@
+{
+  "name": "data-entry-system",
+  "version": "1.0.0",
+  "description": "A data entry system for managing user input and data processing.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "live-server src",
+    "build": "webpack --mode production",
+    "test": "jest"
+  },
+  "keywords": [
+    "data",
+    "entry",
+    "system",
+    "web",
+    "application"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.0",
+    "webpack": "^5.0.0",
+    "live-server": "^1.2.1"
+  }
+}

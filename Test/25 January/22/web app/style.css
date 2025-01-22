@@ -1,0 +1,10 @@
+body{
+    display: flex;
+    min-width: 320px;
+}
+.navbar{
+    display: flex;
+    background-color: #d97b7b;
+    color: #000000;
+    flex-direction:column;
+}
