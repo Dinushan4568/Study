@@ -3,9 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Village People Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Village People Management System</h1>
+
+        <h2>Search</h2>
+        <label for="search">Search by Home ID or NIC:</label>
+        <input type="text" id="search" placeholder="Enter Home ID or NIC">
+        <button onclick="searchPerson()">Search</button>
+
+        <h2>Add/Update Person</h2>
+        <label for="homeId">Home ID:</label>
+        <input type="text" id="homeId">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+
+        <label for="nic">NIC Number:</label>
+        <input type="text" id="nic">
+
+        <label for="address">Address:</label>
+        <input type="text" id="address">
+
+        <label for="job">Job:</label>
+        <input type="text" id="job">
+
+        <label for="age">Age:</label>
+        <input type="number" id="age">
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob">
+
+        <label for="maritalStatus">Marital Status:</label>
+        <select id="maritalStatus">
+            <option value="Married">Married</option>
+            <option value="Unmarried">Unmarried</option>
+        </select>
+
+        <label for="education">Education Qualification:</label>
+        <input type="text" id="education">
+
+        <label for="grounds">Grounds:</label>
+        <input type="text" id="grounds">
+
+        <label for="skills">Job Skills:</label>
+        <input type="text" id="skills">
+
+        <label for="other">Other Information:</label>
+        <input type="text" id="other">
+
+        <button onclick="addOrUpdatePerson()">Add/Update Person</button>
+
+        <h2>People List</h2>
+        <table id="peopleTable">
+            <thead>
+                <tr>
+                    <th>Home ID</th>
+                    <th>Name</th>
+                    <th>NIC</th>
+                    <th>Address</th>
+                    <th>Job</th>
+                    <th>Age</th>
+                    <th>Date of Birth</th>
+                    <th>Marital Status</th>
+                    <th>Education</th>
+                    <th>Grounds</th>
+                    <th>Skills</th>
+                    <th>Other</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic rows will be added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function searchPerson() {
+            const searchValue = document.getElementById('search').value;
+            const response = await fetch(`db.php?search=${encodeURIComponent(searchValue)}`);
+            const people = await response.json();
+
+            const tableBody = document.querySelector('#peopleTable tbody');
+            tableBody.innerHTML = '';
+
+            people.forEach(person => {
+                const row = `
+                    <tr>
+                        <td>${person.home_id}</td>
+                        <td>${person.name}</td>
+                        <td>${person.nic}</td>
+                        <td>${person.address}</td>
+                        <td>${person.job}</td>
+                        <td>${person.age}</td>
+                        <td>${person.dob}</td>
+                        <td>${person.marital_status}</td>
+                        <td>${person.education}</td>
+                        <td>${person.grounds}</td>
+                        <td>${person.skills}</td>
+                        <td>${person.other}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        async function addOrUpdatePerson() {
+            const data = {
+                homeId: document.getElementById('homeId').value,
+                name: document.getElementById('name').value,
+                nic: document.getElementById('nic').value,
+                address: document.getElementById('address').value,
+                job: document.getElementById('job').value,
+                age: document.getElementById('age').value,
+                dob: document.getElementById('dob').value,
+                maritalStatus: document.getElementById('maritalStatus').value,
+                education: document.getElementById('education').value,
+                grounds: document.getElementById('grounds').value,
+                skills: document.getElementById('skills').value,
+                other: document.getElementById('other').value
+            };
+
+            const response = await fetch('db.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            alert(result.message || result.error);
+        }
+    </script>
 </body>
 </html>
