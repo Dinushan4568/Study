@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Java Script final game</title>
+
+    <style type="text/css">
+
+        #shape{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="shape"></div>
+    <script>
+
+        var start = new Date().getTime();
+        document.getElementById("shape").onclick = function(){
+
+
+            document.getElementById("shape").style.display = 'none';
+
+            var end = new Date().getTime();
+
+            var time = (end - start);
+            alert((time)/1000);
+        };
+    </script>
+</body>
+</html>
