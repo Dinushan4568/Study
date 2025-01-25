@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <P>Enter Number</P>
+    <P>Enter Between 1 to 10 Number</P>
+    <p><input type="text" id="GuessNumber"></p>
+    <p><button id="GuessNumberCheck">Done</button></p>
+    <script>
+        
+        document.getElementById('GuessNumberCheck').onclick = function(){
+            var GuessNumberEntered = document.getElementById('GuessNumber').value;
+            GuessNumber = (Math.floor(Math.random() * 10));
+            
+            if(GuessNumber==GuessNumberEntered){
+                document.write('Done' + ' ' + 'Number is' + ' '+ GuessNumber);
+            }else{document.write('Not Done' + ' ' + 'Number is' + ' '+ GuessNumber);
+            };
+        }
+
+        
+
+
+    </script>
+</body>
+</html>

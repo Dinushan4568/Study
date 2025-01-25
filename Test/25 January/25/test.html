@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <P>Enter user name </P>
+
+    <P><input type="text" id="userName"></P>
+
+    <p><button id="userNameButton">Enter</button></p>
+
+    <script>
+        document.getElementById('userNameButton').onclick = function() {
+
+            var userNameEntered = document.getElementById('userName').value;
+            userName= 'madhuka';
+
+            if(userName==userNameEntered){
+                document.write('Done');
+            }else{
+                document.write('not done');
+
+                
+            }
+        }
+    </script>
+</body>
+</html>
