@@ -1,0 +1,90 @@
+<!DOCTYPE>
+<hlml>
+    <head>
+        <title>2022 Q1</title>
+    </head>
+        <body>
+            <div class = 'all'>
+                <h1>Employee Details</h1>
+                <form method = 'post' action="Q1.php">
+                    <table>
+                        <tr>
+                            <td><lable>Employee ID</lable></td>
+                            <td><input type = 'text' id = 'employeeId' name="employeeId"></td>
+                        </tr>
+
+                        <tr>
+                            <td><lable>NIC</lable></td>
+                            <td><input type = 'text' id = 'nic' name = 'nic'></td>
+                        </tr>
+
+                        <tr>
+                            <td><lable>Title</lable></td>
+                            <td><input type = 'text' id = 'title' name = 'title'></td>
+                        </tr>
+
+                        <tr>
+                            <td><lable>First Name</lable></td>
+                            <td><input type = 'text' id="firstName" name = 'firstName'></td>
+                        </tr>
+
+                        <tr>
+                            <td><lable>Last Name</lable></td>
+                            <td><input type='text' id = 'lastName' name = 'lastName'></td>
+                        </tr>
+
+                        <tr>
+                            <td><lable>Gender</lable></td>
+                            <td><input type = 'text' id='gender' name='gender'></td>
+                        </tr>
+
+                        <tr>
+                            <td><lable>Date of Birth</lable></td>
+                            <td><input type = 'text' id='dateOfBirth' name = 'dateOfBith'></td>
+                        </tr>
+
+                        <tr>
+                            <td><lable>Age</lable></td>
+                            <td><input type = 'text' id = 'age' name = 'age'></td>
+                        </tr>
+
+
+                        <tr>
+                            <td><lable>Salary</lable></td>
+                            <td><input type = 'text' id = 'salary' name = 'salary'></td>
+                        </tr>
+                                
+
+                    </table><br>
+                    <button id = 'submitButton' name = 'submitButton'>SUBMIT</button>
+                </form>
+
+                
+            </div>
+
+
+            <script>
+                document.getElementById('title').onchange = function(){
+
+                    var Title = document.getElementById('title').value;
+                  
+                    if(Title == 'Mr'){
+                        document.getElementById('gender').value = 'Male'; 
+                    } else if(Title == 'Mrs' || Title == 'Miss'){
+                        document.getElementById('gender').value = 'Female';
+                    }else{ document.getElementById('gender').value = 'invalid title';}
+                };
+            </script>
+
+        </body>
+
+
+        <style>
+            .all{
+                border: 2px solid black;
+                width: 25%;
+                margin: auto;
+                padding: 20px;
+            }
+        </style>
+</hlml>

@@ -1,0 +1,48 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>2021Q1</title>
+    </head>
+    <body>
+        <script>
+            for (var i = 0; i<=15 ; i++){
+                if(i % 2 ==0) {
+                    document.write(i + ' is even <br>');
+                } else {
+                    document.write(i + ' is odd <br>');
+                }
+            }
+        </script>
+
+        <script>
+            function addNumber(x){
+                var sum = 0;
+
+                for (var i = 0; i<=x; i++){
+                    
+                  
+                 sum = sum + i;
+
+                }
+                return sum;
+            }
+            document.write(addNumber(3));
+        </script>
+        <cript>
+            <script>
+                document.getElementById('button').onclick = function hh(){
+                var x = "";
+                var sentence = "This is a sample sentence for sorting words alphabetically";
+                var words = sentence.split(' ');
+                words.sort();
+
+                for (var i = 0; i < words.length; i++) {
+                    x += words[i] + "<br>";
+                }
+
+                document.getElementById('my_code').innerHTML = x;
+            }
+            </script>
+        </cript>
+    </body>
+</html>
