@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Which number is your mind</p>
+    <p><input type="text" id="myNumber"></p>
+    <p><button id="guessButton">Guess</button></p>
+    <script>
+        document.getElementById('guessButton').onclick = function(){
+
+            var myNumber = document.getElementById('myNumber').value;
+            var numberOfGuess = 1;
+            var gotit = false;
+
+            while(gotit==false){
+                var randomNumber = Math.floor(Math.random()*10);
+                if(randomNumber==myNumber){
+                    gotit = true;
+                    document.write('You got it in '+numberOfGuess+' guesses');
+                }else{
+                    numberOfGuess++;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
