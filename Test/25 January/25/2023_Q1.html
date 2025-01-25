@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Library Management System</title>
+</head>
+    <body>
+
+        <div class="all">
+            
+            <h1>Library Management System</h1>
+            <form method="Post" action ="Q1.php">
+                <table>
+                    <tr>
+                        <td><lable>Issue ID</lable></td>
+                        <td><input type="text" id="issueId" name="issueId" ></td>
+                    <tr>
+
+                    </tr>
+                    <td><lable>Student ID</lable></td>
+                    <td><input type="text" id="studentId" name="studentId" ></td>
+                    </tr>
+
+                    <tr>
+                        <td><lable>Book ID</lable></td>
+                        <td><input type="text" id="bookId" name = 'bookId'></td>
+                    </tr>
+
+                    <tr>
+                        <td><lable>Date Issued</lable></td>
+                        <td><input type="Number" id = 'dateIssue' name = 'date Issue'></td>
+                    </tr>
+
+                    <tr>
+                        <td><lable>Date Due</lable></td>
+                        <td><input type="Number" id = 'DueDate' name = 'Due Date'></td>
+                    </tr>
+
+                    <tr>
+                        <td><lable>Date Return</lable></td>
+                        <td><input type="Number" id = 'ReturnDate' name = 'Return Date'></td>
+
+
+                    </tr>
+
+                    <tr>
+                        <td><lable>Fine</lable></td>
+                        <td><input type="text" id = 'fine' name = 'fine'></td>
+                    </tr>
+                </table><br>
+
+                <div class="Button">
+                    <button id = 'submit' name = 'submit'>SUBMIT</button>
+                    <button id = 'update' name = 'update'>UPDATE</button>
+                </div>
+            </form>
+    
+        </div>
+
+        <style>
+            .all{
+
+                border : 2px solid black;
+                margin : auto;
+                width : 30%;
+                padding : 4px;
+                justify-content : center;
+
+            }
+            .Button{
+                border : 3px solid black;
+                width : 31%;
+                margin : auto;
+                padding : 4px;
+            }
+        </style>
+        
+
+            <script>
+
+                    document.getElementById('ReturnDate').onchange =  function check(){
+
+                    var startDate = document.getElementById("DueDate").value;
+                    var endDate = document.getElementById("ReturnDate").value;
+
+                 if(startDate >= endDate){
+                     doucument.getElementById('fine').value = 0;
+                    }else{
+                        var fine = (endDate - startDate) * 10;
+                        document.getElementById('fine').value = fine;
+                 }         
+                }
+            </script>
+
+    </body>
+</html>
