@@ -29,7 +29,6 @@ header p{
 
 .container{
     justify-content: center;
-    align-items: center;
     display: flex;
     height: 100vh;
 }
@@ -39,9 +38,19 @@ header p{
 .product-text{
     color: rgb(0, 0, 0);
     width: auto;
+    justify-content:left;
+    flex:auto;
+    padding-left: 10%;
 }
-
-
+.product-card img{
+    width: 50px;
+}
+.product-container{
+    display: inline-flex;
+    position: relative;
+    flex-direction:row;
+    
+}
 
 /* about */
 
