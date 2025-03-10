@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="navbar">
+        <nav>
+            <div class="logo">
+                <h2>Menu</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="sale.html"><i class="fas fa-shopping-cart"></i> Sale</a>
+                <a href="sales_summery.html"><i class="fas fa-history"></i> History</a>
+                <a href="add_product.html" class="active"><i class="fas fa-plus-circle"></i> Add Product</a>
+                <a href="inventory.html"><i class="fas fa-box"></i> Inventory</a>
+                <a href="employee.html"><i class="fas fa-user"></i> Employee</a>
+                <a href="supliers.html"><i class="fas fa-user"></i> Supliers</a>
+                <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+            </div>
+        </nav>
+    </div>
+    <div class="content">
+        
+        <div class="add-product-form">
+            <form id="productForm" enctype="multipart/form-data">
+            <h2>Add New Product</h2>
+            
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" name="productName" required placeholder="Enter product name">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="food">Food</option>
+                    <option value="other">Other</option>
+                </select>
+                </div>
+                
+                <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" id="brand" name="brand" required placeholder="Enter brand name">
+                </div>
+
+                <div class="form-group">
+                    <label for="size">Size</label>
+                    <input type="text" id="size" name="size" placeholder="Product size (optional)">
+                    </div>
+            </div>
+            
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="costPrice">Cost Price</label>
+                    <input type="number" id="costPrice" name="costPrice" min="0" required placeholder="Cost price per unit">
+                </div>
+                <div class="form-group">
+                    <label for="sellingPrice">Selling Price</label>
+                    <input type="number" id="sellingPrice" name="sellingPrice" min="0" required placeholder="Selling price per unit">
+                </div>
+                <div class="form-group">
+                    <label for="profit">Profit per Unit</label>
+                    <input type="number" id="profit" name="profit" readonly placeholder="Profit per unit">
+                </div>
+            </div>
+
+            <script>
+                // Function to calculate profit automatically
+                function calculateProfit() {
+                    const sellingPrice = parseFloat(document.getElementById('sellingPrice').value) || 0;
+                    const costPrice = parseFloat(document.getElementById('costPrice').value) || 0;
+                    
+                    if (sellingPrice && costPrice) {
+                        const profit = sellingPrice - costPrice;
+                        document.getElementById('profit').value = profit.toFixed(2);
+                    } else {
+                        document.getElementById('profit').value = "";
+                    }
+                }
+                
+                // Add event listeners to update profit when values change
+                document.getElementById('sellingPrice').addEventListener('input', calculateProfit);
+                document.getElementById('costPrice').addEventListener('input', calculateProfit);
+                
+                // Initialize calculation on page load
+                document.addEventListener('DOMContentLoaded', calculateProfit);
+            </script>
+            
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" name="quantity" min="1" required placeholder="Number of items">
+            </div>
+            
+            <div class="form-group file-input-container">
+                <label for="productImage">Product Image</label>
+                <div class="file-input-wrapper">
+                <input type="file" id="productImage" name="productImage" accept="image/*">
+                <label for="productImage" class="file-label"><i class="fas fa-cloud-upload-alt"></i> Choose an image</label>
+                <span class="file-name">No file chosen</span>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </div>
+            </form>
+        </div>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: rgb(101, 179, 101);
+            }
+            .content {
+                padding: 20px;
+                background-color:rgb(101, 179, 101);
+
+            }
+        </style>
+
+        <script>
+            // Show filename when a file is selected
+            document.getElementById('productImage').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
+            document.querySelector('.file-name').textContent = fileName;
+            });
+
+            
+        </script></div>
+    </div>
+</body>
+</html>
