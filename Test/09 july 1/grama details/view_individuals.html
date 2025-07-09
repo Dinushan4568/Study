@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Individuals</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <span>Gramasewaka Village Management</span>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+  <aside class="sidebar">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="add_individual.html">Add Individual</a>
+    <a href="view_individuals.html">View Individuals</a>
+    <a href="add_household.html">Add Household</a>
+    <a href="add_land.html">Add Land Record</a>
+    <a href="update_request.html">Submit Update Request</a>
+    <a href="promotion.html" id="promotionLink" style="display:none;">User Promotion</a>
+  </aside>
+  <main>
+    <h2>Individuals List</h2>
+    <table id="individualsTable" border="1" style="width:100%;background:#fff;">
+      <thead>
+        <tr>
+          <th>NIC</th><th>Full Name</th><th>Gender</th><th>Address</th><th>Mobile</th><th>Birthdate</th><th>Job</th><th>Married</th><th>Land ID</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/individuals.js"></script>
+</body>
+</html>
