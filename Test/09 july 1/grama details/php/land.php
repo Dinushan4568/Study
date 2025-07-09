@@ -9,5 +9,10 @@ switch ($method) {
         $ok = $stmt->execute();
         echo json_encode(['success' => $ok, 'message' => $ok ? '' : $stmt->error]);
         break;
+    case 'GET':
+        $result = $conn->query("SELECT * FROM land_records");
+        $rows = [];
+        while ($row = $result->fetch_assoc()) { $rows[] = $row; }
+        echo json_encode($rows);
+        break;
 }
-?>
