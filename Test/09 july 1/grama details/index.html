@@ -6,7 +6,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="login-container">
+  <script src="js/navbar.js"></script>
+  <div class="login-container card">
+    <div style="text-align:center;margin-bottom:1.5em;">
+      <span style="font-size:2em;font-weight:700;color:#1abc9c;">Gramasewaka</span>
+    </div>
     <h2>Login</h2>
     <form id="loginForm">
       <input type="text" id="username" placeholder="Username" required>
@@ -19,8 +23,8 @@
     </div>
   </div>
   <!-- Registration Modal -->
-  <div id="registerModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;">
-    <div style="background:#fff;padding:2em;border-radius:8px;max-width:400px;margin:auto;position:relative;">
+  <div id="registerModal" class="modal card" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:var(--bg-alt);padding:2em;border-radius:8px;max-width:400px;margin:auto;position:relative;">
       <span id="closeRegister" style="position:absolute;top:10px;right:15px;cursor:pointer;font-size:1.2em;">&times;</span>
       <h2>Create Account</h2>
       <form id="registerForm">
@@ -33,7 +37,9 @@
       </form>
     </div>
   </div>
+  <button class="toggle-mode-btn" id="toggleModeBtn" style="position:fixed;top:20px;right:20px;z-index:1001;">🌙 Dark Mode</button>
   <script src="js/auth.js"></script>
+  <script src="js/theme.js"></script>
   <script>
     document.getElementById('showRegister').onclick = function() {
       document.getElementById('registerModal').style.display = 'flex';

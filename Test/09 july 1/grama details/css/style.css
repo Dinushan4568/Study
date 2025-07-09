@@ -1,11 +1,225 @@
-body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; }
-.top-nav { background: #2c3e50; color: #fff; padding: 1em; display: flex; justify-content: space-between; align-items: center; }
-.sidebar { width: 200px; background: #34495e; position: fixed; top: 60px; bottom: 0; left: 0; padding-top: 2em; }
-.sidebar a { display: block; color: #fff; padding: 1em; text-decoration: none; }
-.sidebar a:hover { background: #1abc9c; }
-main { margin-left: 220px; padding: 2em; }
-.login-container { max-width: 400px; margin: 100px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-input, button { width: 100%; padding: 0.8em; margin: 0.5em 0; border-radius: 4px; border: 1px solid #ccc; }
-button { background: #1abc9c; color: #fff; border: none; cursor: pointer; }
-button:hover { background: #16a085; }
-#loginError { color: red; }
+/* CSS Variables for Light and Dark Modes */
+:root {
+  --primary: #16a085;
+  --primary-dark: #1abc9c;
+  --bg: #f4f6f8;
+  --bg-alt: #fff;
+  --text: #222;
+  --border: #e0e0e0;
+}
+body.darkmode {
+  --primary: #1abc9c;
+  --primary-dark: #16a085;
+  --bg: #181c1f;
+  --bg-alt: #23272a;
+  --text: #f4f6f8;
+  --border: #333;
+}
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+.top-nav {
+  background: #7e92ca;
+  color: #fff;
+  padding: 0.7em 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.top-nav span {
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+}
+.top-nav .nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.top-nav .nav-actions a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.05em;
+  margin: 0 0.2em;
+  padding: 0.2em 0.7em;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s, text-decoration 0.2s;
+  position: relative;
+  display: inline-block;
+}
+.top-nav .nav-actions a:hover, .top-nav .nav-actions a.active {
+  color: #fff;
+  background: rgba(255,255,255,0.10);
+  text-decoration: underline;
+}
+.card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(25,34,58,0.07);
+  padding: 2.5em 2.5em 2em 2.5em;
+  margin-bottom: 2em;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+main {
+  padding: 3em 3em 2em 3em;
+  min-height: 100vh;
+  background: #f7fafc;
+  transition: background 0.3s;
+}
+h1, h2 {
+  color: #19223a;
+  margin-bottom: 1.2em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(25,34,58,0.04);
+  border-radius: 12px;
+  overflow: hidden;
+}
+thead {
+  background: #f2f7fa;
+  color: #19223a;
+}
+th, td {
+  padding: 1.1em 1em;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+  font-size: 1.04em;
+}
+tr:last-child td {
+  border-bottom: none;
+}
+.login-container, .modal {
+  max-width: 420px;
+  margin: 100px auto;
+  background: #fff;
+  padding: 2.5em 2.5em 2em 2.5em;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(25,34,58,0.10);
+}
+input, button, select, textarea {
+  width: 100%;
+  padding: 1em;
+  margin: 0.7em 0;
+  border-radius: 8px;
+  border: 1.5px solid #e0e0e0;
+  font-size: 1.08em;
+  background: #f7fafc;
+  color: #19223a;
+  transition: border 0.2s, background 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  border: 1.5px solid #1abc9c;
+  outline: none;
+  background: #fff;
+}
+button[type="submit"] {
+  background: #1abc9c;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-top: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(25,34,58,0.04);
+  transition: background 0.2s;
+}
+button[type="submit"]:hover {
+  background: #16a085;
+}
+#loginError, #registerMsg, #addIndividualMsg, #addHouseholdMsg, #addLandMsg, #updateRequestMsg, #promotionMsg {
+  color: #e74c3c;
+  margin-top: 0.5em;
+  font-size: 1em;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  background: #f7fafc;
+}
+::-webkit-scrollbar-thumb {
+  background: #1abc9c;
+  border-radius: 8px;
+}
+.small-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0;
+  margin-left: 0.5em;
+  border-radius: 50%;
+  font-size: 1.15em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f7fa;
+  color: #19223a;
+  border: 1.5px solid #e0e0e0;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.small-btn:hover {
+  background: #1abc9c;
+  color: #fff;
+  border: 1.5px solid #1abc9c;
+}
+body.darkmode, body.darkmode main {
+  background: #181c1f;
+  color: #f4f6f8;
+}
+body.darkmode .top-nav {
+  background: #23272a;
+  color: #fff;
+}
+body.darkmode .card, body.darkmode .login-container, body.darkmode .modal, body.darkmode table {
+  background: #23272a;
+  color: #f4f6f8;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+}
+body.darkmode input, body.darkmode select, body.darkmode textarea {
+  background: #23272a;
+  color: #f4f6f8;
+  border: 1.5px solid #333;
+}
+body.darkmode input:focus, body.darkmode select:focus, body.darkmode textarea:focus {
+  background: #181c1f;
+  border: 1.5px solid #1abc9c;
+}
+body.darkmode thead {
+  background: #1abc9c;
+  color: #fff;
+}
+body.darkmode ::-webkit-scrollbar {
+  background: #23272a;
+}
+body.darkmode ::-webkit-scrollbar-thumb {
+  background: #1abc9c;
+}
+body.darkmode .small-btn {
+  background: #23272a;
+  color: #f4f6f8;
+  border: 1.5px solid #333;
+}
+body.darkmode .small-btn:hover {
+  background: #1abc9c;
+  color: #fff;
+  border: 1.5px solid #1abc9c;
+}

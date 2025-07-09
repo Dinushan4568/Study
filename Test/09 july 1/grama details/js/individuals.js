@@ -4,6 +4,8 @@ if (document.getElementById('addIndividualForm')) {
     e.preventDefault();
     const form = e.target;
     const data = Object.fromEntries(new FormData(form).entries());
+    // If house_number is present, send it to the backend
+    if (data.house_number && data.house_number.trim() === '') delete data.house_number;
     const res = await fetch('php/individuals.php', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

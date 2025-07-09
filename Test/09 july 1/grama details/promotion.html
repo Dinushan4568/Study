@@ -6,30 +6,21 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <nav class="top-nav">
-    <span>Gramasewaka Village Management</span>
-    <button id="logoutBtn">Logout</button>
-  </nav>
-  <aside class="sidebar">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="add_individual.html">Add Individual</a>
-    <a href="view_individuals.html">View Individuals</a>
-    <a href="add_household.html">Add Household</a>
-    <a href="add_land.html">Add Land Record</a>
-    <a href="update_request.html">Submit Update Request</a>
-    <a href="promotion.html" id="promotionLink" style="display:none;">User Promotion</a>
-  </aside>
+  <script src="js/navbar.js"></script>
   <main>
-    <h2>User Promotion</h2>
-    <table id="usersTable" border="1" style="width:100%;background:#fff;">
-      <thead>
-        <tr><th>Username</th><th>Role</th><th>Promote To</th><th>Action</th></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <div id="promotionMsg"></div>
+    <div class="card">
+      <h2>User Promotion</h2>
+      <table id="usersTable" border="0">
+        <thead>
+          <tr><th>Username</th><th>Role</th><th>Promote To</th><th>Action</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="promotionMsg"></div>
+    </div>
   </main>
   <script src="js/main.js"></script>
   <script src="js/promotion.js"></script>
+  <script src="js/theme.js"></script>
 </body>
 </html>
