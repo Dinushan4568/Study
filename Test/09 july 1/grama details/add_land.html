@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Land Record</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script src="js/navbar.js"></script>
+  <main>
+    <div class="card">
+      <h2>Add Land Record</h2>
+      <form id="addLandForm">
+        <input type="text" name="land_id" placeholder="Land ID" required>
+        <input type="number" step="0.01" name="size" placeholder="Size (acres)" required>
+        <input type="text" name="location" placeholder="Location" required>
+        <input type="text" name="usage_type" placeholder="Usage Type" required>
+        <input type="text" name="owner_nic" placeholder="Owner NIC">
+        <button type="submit">Add Land</button>
+        <div id="addLandMsg"></div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/land.js"></script>
+  <script src="js/theme.js"></script>
+</body>
+</html>

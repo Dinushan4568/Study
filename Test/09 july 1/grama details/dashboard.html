@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+  <script src="js/navbar.js"></script>
+  <main>
+    <div class="card" style="padding:2.5em 2.5em 2em 2.5em;">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2em 1em;">
+        <div style="flex:1 1 350px;min-width:300px;">
+          <h1 style="font-size:2.2em;margin-bottom:0.3em;">Welcome to Sooriyawewa Dashboard</h1>
+          <div style="font-size:1.15em;color:#555;max-width:500px;">Manage your village records, households, land, and more with a modern, easy-to-use interface. Use the navigation above to get started.</div>
+        </div>
+        <div style="flex:0 0 180px;text-align:center;">
+          <img src="Images/image copy.png" alt="Village" style="max-width:1600px;width:100%;margin-bottom:0.5em;">
+        </div>
+      </div>
+      <div class="dashboard-stats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2em;margin-top:2.5em;">
+        <div class="stat-card" style="background:#9bccf5;border-radius:14px;padding:1.5em 1.2em;display:flex;align-items:center;gap:1em;box-shadow:0 2px 8px rgba(25,34,58,0.04);">
+          <div style="font-size:2em;color:#1abc9c;"><i class="fa-solid fa-users"></i></div>
+          <div>
+            <div style="font-size:1.5em;font-weight:700;color: #1abc9c;" id="stat-individuals">-</div>
+            <div style="font-size:1em;color:#555;">Individuals</div>
+          </div>
+        </div>
+        <div class="stat-card" style="background:#9bccf5;border-radius:14px;padding:1.5em 1.2em;display:flex;align-items:center;gap:1em;box-shadow:0 2px 8px rgba(25,34,58,0.04);">
+          <div style="font-size:2em;color:#7e92ca;"><i class="fa-solid fa-house"></i></div>
+          <div>
+            <div style="font-size:1.5em;font-weight:700;color: #7e92ca;" id="stat-households">-</div>
+            <div style="font-size:1em;color:#555;">Households</div>
+          </div>
+        </div>
+        <div class="stat-card" style="background:#9bccf5;border-radius:14px;padding:1.5em 1.2em;display:flex;align-items:center;gap:1em;box-shadow:0 2px 8px rgba(25,34,58,0.04);">
+          <div style="font-size:2em;color:#16a085;"><i class="fa-solid fa-tree"></i></div>
+          <div>
+            <div style="font-size:1.5em;font-weight:700;color: #16a085;" id="stat-land">-</div>
+            <div style="font-size:1em;color:#555;">Land Records</div>
+          </div>
+        </div>
+        <div class="stat-card" style="background:#9bccf5;border-radius:14px;padding:1.5em 1.2em;display:flex;align-items:center;gap:1em;box-shadow:0 2px 8px rgba(25,34,58,0.04);">
+          <div style="font-size:2em;color:#e67e22;"><i class="fa-solid fa-user-tie"></i></div>
+          <div>
+            <div style="font-size:1.5em;font-weight:700;color: #e67e22;" id="stat-users">-</div>
+            <div style="font-size:1em;color:#555;">System Users</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    // Fetch stats for dashboard
+    async function fetchStats() {
+      const [i, h, l, u] = await Promise.all([
+        fetch('php/individuals.php').then(r=>r.json()),
+        fetch('php/view_households.php').then(r=>r.json()),
+        fetch('php/land.php', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({__count:true})}).then(r=>r.json()),
+        fetch('php/users.php').then(r=>r.json())
+      ]);
+      document.getElementById('stat-individuals').textContent = Array.isArray(i) ? i.length : '-';
+      document.getElementById('stat-households').textContent = Array.isArray(h) ? h.length : '-';
+      document.getElementById('stat-land').textContent = l.count !== undefined ? l.count : '-';
+      document.getElementById('stat-users').textContent = Array.isArray(u) ? u.length : '-';
+    }
+    fetchStats();
+  </script>
+</body>
+</html>

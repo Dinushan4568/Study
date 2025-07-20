@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submit Update Request</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script src="js/navbar.js"></script>
+  <main>
+    <div class="card">
+      <h2>Submit Update Request</h2>
+      <form id="updateRequestForm">
+        <input type="text" name="target_nic" placeholder="Target NIC" required>
+        <input type="text" name="field_to_update" placeholder="Field to Update" required>
+        <input type="text" name="old_value" placeholder="Old Value" required>
+        <input type="text" name="new_value" placeholder="New Value" required>
+        <button type="submit">Submit Request</button>
+        <div id="updateRequestMsg"></div>
+      </form>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/update_request.js"></script>
+  <script src="js/theme.js"></script>
+</body>
+</html>

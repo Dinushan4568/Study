@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Individuals</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script src="js/navbar.js"></script>
+  <main>
+    <div class="cards">
+      <h2>Individuals List</h2>
+      <div class="search-bar">
+        <input type="text" id="individualSearch" placeholder="Search individuals...">
+        <button id="individualSearchBtn" type="button"><i class="fa fa-search"></i></button>
+      </div>
+      <table id="individualsTable" border="0">
+        <thead>
+          <tr>
+            <th>NIC</th>
+            <th>Full Name</th>
+            <th>Short Name</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Mobile</th>
+            <th>Birthdate</th>
+            <th>Job</th>
+            <th>Married</th>
+            <th>Land ID</th>
+            <th>Image</th>
+            <th>Qualifications</th>
+            <th>Documents</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/individuals.js"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    let allIndividuals = [];
+    async function loadIndividuals() {
+      const res = await fetch('php/individuals.php');
+      allIndividuals = await res.json();
+      renderIndividuals(allIndividuals);
+    }
+    function renderIndividuals(individuals) {
+      const tbody = document.querySelector('#individualsTable tbody');
+      tbody.innerHTML = '';
+      (Array.isArray(individuals) ? individuals : []).forEach(ind => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><a href="cv.html?nic=${encodeURIComponent(ind.nic)}" class="nic-link">${ind.nic}</a></td>
+          <td>${ind.full_name}</td>
+          <td>${ind.short_name || ''}</td>
+          <td>${ind.gender}</td>
+          <td>${ind.address}</td>
+          <td>${ind.mobile}</td>
+          <td>${ind.birthdate}</td>
+          <td>${ind.job}</td>
+          <td>${ind.married == 1 ? 'Yes' : 'No'}</td>
+          <td>${ind.land_id || ''}</td>
+          <td>${ind.image_url ? `<img src="${ind.image_url}" alt="img" style="max-width:60px;max-height:40px;border-radius:6px;">` : ''}</td>
+          <td>${ind.qualifications || ''}</td>
+          <td>${ind.documents || ''}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+    document.getElementById('individualSearchBtn').onclick = function() {
+      const q = document.getElementById('individualSearch').value.toLowerCase();
+      renderIndividuals(allIndividuals.filter(ind =>
+        ind.nic.toLowerCase().includes(q) ||
+        ind.full_name.toLowerCase().includes(q) ||
+        (ind.short_name && ind.short_name.toLowerCase().includes(q)) ||
+        ind.gender.toLowerCase().includes(q) ||
+        ind.address.toLowerCase().includes(q) ||
+        ind.mobile.toLowerCase().includes(q) ||
+        ind.birthdate.toLowerCase().includes(q) ||
+        ind.job.toLowerCase().includes(q) ||
+        (ind.land_id && ind.land_id.toLowerCase().includes(q)) ||
+        (ind.qualifications && ind.qualifications.toLowerCase().includes(q)) ||
+        (ind.documents && ind.documents.toLowerCase().includes(q))
+      ));
+    };
+    document.getElementById('individualSearch').onkeyup = function(e) {
+      if (e.key === 'Enter') document.getElementById('individualSearchBtn').click();
+    };
+    window.onload = loadIndividuals;
+  </script>
+  <style>
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 3px solid #4285f4;
+      border-radius: 2em;
+      padding: 0.2em 0.7em 0.2em 1em;
+      max-width: 420px;
+      margin: 1.2em 0 1.5em 0;
+      box-sizing: border-box;
+    }
+    .search-bar input[type="text"] {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 1.15em;
+      flex: 1;
+      padding: 0.7em 0.5em;
+      color: #4285f4;
+    }
+    .search-bar button {
+      background: #4285f4;
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 2.2em;
+      height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3em;
+      cursor: pointer;
+      margin-left: 0.5em;
+      transition: background 0.2s;
+    }
+    .search-bar button:hover {
+      background: #2a5dab;
+    }
+    @media (max-width: 600px) {
+      .search-bar { max-width: 100%; }
+    }
+  </style>
+</body>
+</html>

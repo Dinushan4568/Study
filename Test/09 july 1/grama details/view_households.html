@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Households</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script src="js/navbar.js"></script>
+  <main>
+    <div class="card">
+      <h2>Households & Members</h2>
+      <div class="search-bar">
+        <input type="text" id="householdSearch" placeholder="Search households...">
+        <button id="householdSearchBtn" type="button"><i class="fa fa-search"></i></button>
+      </div>
+      <table id="householdsTable" border="0">
+        <thead>
+          <tr>
+            <th>House Number</th>
+            <th>Family Name</th>
+            <th>Address</th>
+            <th>Members (NICs)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/view_households.js"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    let allHouseholds = [];
+    async function loadHouseholds() {
+      const res = await fetch('php/view_households.php');
+      allHouseholds = await res.json();
+      renderHouseholds(allHouseholds);
+    }
+    function renderHouseholds(households) {
+      const tbody = document.querySelector('#householdsTable tbody');
+      tbody.innerHTML = '';
+      (Array.isArray(households) ? households : []).forEach(hh => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${hh.house_number}</td><td>${hh.family_name}</td><td>${hh.address}</td><td>${hh.members.join(', ')}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    document.getElementById('householdSearchBtn').onclick = function() {
+      const q = document.getElementById('householdSearch').value.toLowerCase();
+      renderHouseholds(allHouseholds.filter(hh =>
+        hh.house_number.toLowerCase().includes(q) ||
+        hh.family_name.toLowerCase().includes(q) ||
+        hh.address.toLowerCase().includes(q) ||
+        (hh.members && hh.members.join(',').toLowerCase().includes(q))
+      ));
+    };
+    document.getElementById('householdSearch').onkeyup = function(e) {
+      if (e.key === 'Enter') document.getElementById('householdSearchBtn').click();
+    };
+    window.onload = loadHouseholds;
+  </script>
+  <style>
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 3px solid #4285f4;
+      border-radius: 2em;
+      padding: 0.2em 0.7em 0.2em 1em;
+      max-width: 420px;
+      margin: 1.2em 0 1.5em 0;
+      box-sizing: border-box;
+    }
+    .search-bar input[type="text"] {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 1.15em;
+      flex: 1;
+      padding: 0.7em 0.5em;
+      color: #4285f4;
+    }
+    .search-bar button {
+      background: #4285f4;
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 2.2em;
+      height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3em;
+      cursor: pointer;
+      margin-left: 0.5em;
+      transition: background 0.2s;
+    }
+    .search-bar button:hover {
+      background: #2a5dab;
+    }
+    @media (max-width: 600px) {
+      .search-bar { max-width: 100%; }
+    }
+  </style>
+</body>
+</html>

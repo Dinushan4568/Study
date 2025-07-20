@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Individual CV</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    .cv-container { max-width: 900px; margin: 2em auto; background: #fff; border-radius: 18px; box-shadow: 0 4px 32px rgba(25,34,58,0.10); padding: 2.5em; display: flex; gap: 2em; }
+    .cv-left { flex: 0 0 260px; background: #eaf4fa; border-radius: 14px; padding: 2em 1.2em; display: flex; flex-direction: column; align-items: center; }
+    .cv-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 1.2em; background: #fff; border: 4px solid #fff; box-shadow: 0 2px 8px rgba(25,34,58,0.08); }
+    .cv-info { width: 100%; margin-bottom: 1.2em; }
+    .cv-info i { color: #16a085; margin-right: 0.7em; min-width: 1.2em; text-align: center; }
+    .cv-label { font-weight: 600; color: #222; margin-bottom: 0.2em; }
+    .cv-section { margin-bottom: 1.5em; }
+    .cv-section-title { font-size: 1.2em; font-weight: 700; color: #16a085; border-bottom: 2px solid #16a085; display: inline-block; margin-bottom: 0.5em; }
+    .cv-main { flex: 1; }
+    .cv-main h1 { font-size: 2em; margin-bottom: 0.2em; }
+    .cv-main h2 { font-size: 1.2em; color: #7e92ca; margin-bottom: 1em; }
+    .cv-main .cv-row { margin-bottom: 1.2em; }
+    .cv-main .cv-row strong { color: #222; }
+    .cv-main .cv-docs a { color: #1abc9c; text-decoration: underline; word-break: break-all; }
+    @media (max-width: 900px) { .cv-container { flex-direction: column; padding: 1.2em; } .cv-left { flex-direction: row; gap: 1.5em; width: 100%; justify-content: flex-start; } }
+  </style>
+</head>
+<body>
+  <script src="js/navbar.js"></script>
+  <main>
+    <div class="cv-container" id="cvContainer">
+      <div>Loading...</div>
+    </div>
+  </main>
+  <script>
+    async function getIndividual(nic) {
+      const res = await fetch('php/individuals.php');
+      const all = await res.json();
+      return all.find(i => i.nic === nic);
+    }
+    function renderCV(ind) {
+      if (!ind) {
+        document.getElementById('cvContainer').innerHTML = '<div style="color:#e74c3c;">Individual not found.</div>';
+        return;
+      }
+      document.getElementById('cvContainer').innerHTML = `
+        <div class="cv-left">
+          <img class="cv-photo" src="${ind.image_url || 'Images/image.png'}" alt="Profile Photo">
+          <div class="cv-info"><i class="fa fa-user"></i> ${ind.gender || ''}</div>
+          <div class="cv-info"><i class="fa fa-calendar"></i> ${ind.birthdate || ''}</div>
+          <div class="cv-info"><i class="fa fa-phone"></i> ${ind.mobile || ''}</div>
+          <div class="cv-info"><i class="fa fa-map-marker-alt"></i> ${ind.address || ''}</div>
+        </div>
+        <div class="cv-main">
+          <h1>${ind.full_name || ''}</h1>
+          <h2>${ind.short_name || ''}</h2>
+          <div class="cv-row"><strong>NIC:</strong> ${ind.nic}</div>
+          <div class="cv-row"><strong>Job:</strong> ${ind.job || ''}</div>
+          <div class="cv-row"><strong>Married:</strong> ${ind.married == 1 ? 'Yes' : 'No'}</div>
+          <div class="cv-row"><strong>Land ID:</strong> ${ind.land_id || ''}</div>
+          <div class="cv-section">
+            <div class="cv-section-title">Qualifications</div>
+            <div>${ind.qualifications || '-'}</div>
+          </div>
+          <div class="cv-section">
+            <div class="cv-section-title">Documents</div>
+            <div class="cv-docs">${ind.documents ? `<a href="${ind.documents}" target="_blank">${ind.documents}</a>` : '-'}</div>
+          </div>
+        </div>
+      `;
+    }
+    function getQueryParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    window.onload = async function() {
+      const nic = getQueryParam('nic');
+      if (!nic) {
+        document.getElementById('cvContainer').innerHTML = '<div style="color:#e74c3c;">No NIC provided.</div>';
+        return;
+      }
+      const ind = await getIndividual(nic);
+      renderCV(ind);
+    };
+  </script>
+</body>
+</html>

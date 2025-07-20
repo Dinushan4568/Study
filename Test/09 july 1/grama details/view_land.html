@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Lands</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script src="js/navbar.js"></script>
+  <main>
+    <div class="card">
+      <h2>Land Records</h2>
+      <div class="search-bar">
+        <input type="text" id="landSearch" placeholder="Search lands...">
+        <button id="landSearchBtn" type="button"><i class="fa fa-search"></i></button>
+      </div>
+      <table id="landsTable" border="0">
+        <thead>
+          <tr>
+            <th>Land ID</th>
+            <th>Size (acres)</th>
+            <th>Location</th>
+            <th>Usage Type</th>
+            <th>Owner NIC</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+  <script src="js/main.js"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    let allLands = [];
+    async function loadLands() {
+      const res = await fetch('php/land.php');
+      allLands = await res.json();
+      renderLands(allLands);
+    }
+    function renderLands(lands) {
+      const tbody = document.querySelector('#landsTable tbody');
+      tbody.innerHTML = '';
+      (Array.isArray(lands) ? lands : []).forEach(land => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${land.land_id}</td><td>${land.size}</td><td>${land.location}</td><td>${land.usage_type}</td><td>${land.owner_nic || ''}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    document.getElementById('landSearchBtn').onclick = function() {
+      const q = document.getElementById('landSearch').value.toLowerCase();
+      renderLands(allLands.filter(l =>
+        l.land_id.toLowerCase().includes(q) ||
+        l.location.toLowerCase().includes(q) ||
+        l.usage_type.toLowerCase().includes(q) ||
+        (l.owner_nic && l.owner_nic.toLowerCase().includes(q))
+      ));
+    };
+    document.getElementById('landSearch').onkeyup = function(e) {
+      if (e.key === 'Enter') document.getElementById('landSearchBtn').click();
+    };
+    window.onload = loadLands;
+  </script>
+  <style>
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 3px solid #4285f4;
+      border-radius: 2em;
+      padding: 0.2em 0.7em 0.2em 1em;
+      max-width: 420px;
+      margin: 1.2em 0 1.5em 0;
+      box-sizing: border-box;
+    }
+    .search-bar input[type="text"] {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 1.15em;
+      flex: 1;
+      padding: 0.7em 0.5em;
+      color: #4285f4;
+    }
+    .search-bar button {
+      background: #4285f4;
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 2.2em;
+      height: 2.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3em;
+      cursor: pointer;
+      margin-left: 0.5em;
+      transition: background 0.2s;
+    }
+    .search-bar button:hover {
+      background: #2a5dab;
+    }
+    @media (max-width: 600px) {
+      .search-bar { max-width: 100%; }
+    }
+  </style>
+</body>
+</html>
