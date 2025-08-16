@@ -3,7 +3,7 @@ export const projects = [
     title: 'WeatherNow',
     description: 'Real-time weather app with city search, geolocation, and 7-day forecast.',
     tags: ['React', 'Vite', 'API'],
-    demo: 'https://your-demo-url.com',
+    demo: 'https://heroic-cactus-598528.netlify.app/',
     code: 'https://github.com/your-username/weathernow'
   },
   {

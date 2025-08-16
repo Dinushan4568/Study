@@ -1,0 +1,17 @@
+{
+  "residents": [
+    {
+      "id": 1,
+      "nic": "123456789V",
+      "fullName": "John Doe",
+      "dob": "1990-01-01",
+      "gender": "Male",
+      "phone": "+94123456789",
+      "address": "123 Main St",
+      "familyId": "FAM001",
+      "occupation": "Teacher",
+      "maritalStatus": "Married",
+      "createdAt": "2024-01-01T00:00:00Z"
+    }
+  ]
+}

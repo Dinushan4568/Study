@@ -1,0 +1,10 @@
+{
+  "dbVersion": 1,
+  "theme": "system",
+  "villageName": "Demo Village",
+  "contactEmail": "info@demo.village",
+  "documents": [
+    { "key": "residence_certificate", "name": "Residence Certificate" },
+    { "key": "income_certificate", "name": "Income Certificate" }
+  ]
+}

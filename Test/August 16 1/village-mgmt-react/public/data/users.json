@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "username": "admin",
+      "role": "admin",
+      "salt": "demo123",
+      "password": "admin123"
+    }
+  ]
+}
