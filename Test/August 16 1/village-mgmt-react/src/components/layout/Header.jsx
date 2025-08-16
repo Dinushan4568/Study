@@ -5,14 +5,26 @@ export default function Header({ onToggleTheme }) {
   const { user, logout } = useAuth();
   const { db } = useData();
   return (
-    <header className="flex items-center justify-between p-4 border-b bg-white dark:bg-slate-800">
-      <div className="font-semibold">{db?.settings?.villageName || 'Village'}</div>
-      <div className="flex items-center gap-3">
-        <button className="px-3 py-1 rounded bg-slate-100 dark:bg-slate-700" onClick={onToggleTheme}>Theme</button>
+    <header className="site-header">
+      <div className="brand">
+        <div className="logo" aria-hidden>
+          {/* small SVG logo */}
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3v18M3 12h18" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <div>
+          <div style={{fontWeight:700}}>{db?.settings?.villageName || 'Demo Village'}</div>
+          <div className="muted">Admin console</div>
+        </div>
+      </div>
+
+      <div className="actions">
+        <button className="btn secondary" onClick={onToggleTheme}>Theme</button>
         {user && (
           <>
-            <span className="text-sm opacity-70">{user.username} ({user.role})</span>
-            <button className="px-3 py-1 rounded bg-rose-600 text-white" onClick={logout}>Logout</button>
+            <div className="muted">{user.username} ({user.role})</div>
+            <button className="btn" onClick={logout}>Logout</button>
           </>
         )}
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
+import './styles/modern.css';
 import { BrowserRouter } from 'react-router-dom';
 import DataProvider from './context/DataContext';
 import AuthProvider from './context/AuthContext';
